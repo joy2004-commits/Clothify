@@ -1,0 +1,97 @@
+/* src/app/notifications/notifications.component.css */
+.notifications-container {
+  padding: 20px;
+  background-color: #F5F3FF;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(107, 72, 255, 0.1);
+}
+
+.notifications-container h2 {
+  color: #6B48FF;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.notification-list {
+  margin-top: 10px;
+}
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  padding: 15px;
+  border: 1px solid #8B6FFF;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notification-item.read {
+  background-color: #E6E0FF;
+  border-color: #6B48FF;
+}
+
+.notification-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 72, 255, 0.2);
+}
+
+.notification-item p {
+  color: #4B3A99;
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+
+.notification-item small {
+  color: #8B6FFF;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end;
+}
+
+.notification-item button {
+  background-color: #6B48FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.notification-item button:hover {
+  background-color: #8B6FFF;
+}
+
+.notification-item button.delete-button {
+  background-color: #FF4848;
+}
+
+.notification-item button.delete-button:hover {
+  background-color: #FF6B6B;
+}
+
+.notifications-container p {
+  color: #4B3A99;
+  font-size: 16px;
+  text-align: center;
+}
+
+.notifications-container a {
+  color: #6B48FF;
+  text-decoration: none;
+}
+
+.notifications-container a:hover {
+  text-decoration: underline;
+}

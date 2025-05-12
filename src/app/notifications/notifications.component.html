@@ -1,0 +1,17 @@
+<!-- src/app/notifications/notifications.component.html -->
+<div class="notifications-container">
+  <h2>Notifications</h2>
+  <div class="notification-list" *ngIf="notifications.length > 0; else noNotifications">
+    <div *ngFor="let notification of notifications" class="notification-item" [class.read]="notification.read">
+      <p>{{ notification.message }}</p>
+      <small>{{ notification.date }}</small>
+      <div class="button-group">
+        <button *ngIf="!notification.read" (click)="markAsRead(notification.id)">Mark as Read</button>
+        <button class="delete-button" (click)="deleteNotification(notification.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noNotifications>
+    <p>No notifications available. <a routerLink="/home">Go to Home</a></p>
+  </ng-template>
+</div>

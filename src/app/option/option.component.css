@@ -1,0 +1,122 @@
+.option-container {
+  max-width: 500px;
+  margin: 80px auto 60px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.option-container h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.option-container img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.option-container p {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.option-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.option-selection label {
+  font-size: 1rem;
+  color: #666;
+  margin-right: 10px;
+}
+
+.option-selection select {
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 0.9rem;
+}
+
+button {
+  background-color: #512da8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #3f2282;
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .option-container {
+    margin: 70px 10px 60px 10px;
+    padding: 15px;
+  }
+
+  .option-container img {
+    height: 200px;
+  }
+
+  .option-selection select {
+    padding: 6px;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .option-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .option-container img {
+    height: 150px;
+  }
+
+  .option-selection label {
+    font-size: 0.9rem;
+  }
+
+  .option-selection select {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

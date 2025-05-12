@@ -1,0 +1,63 @@
+<!-- Top Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h2>Welcome to Clothify!</h2>
+  </div>
+  <div class="nav-right">
+    <a (click)="signOut()" style="cursor: pointer;" title="Sign Out">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Sign out</span>
+    </a>
+  </div>
+</nav>
+
+<div class="search-container">
+  <input [(ngModel)]="searchQuery" type="text" placeholder="Search products..." />
+</div>
+
+<div class="categories">
+  <button
+    *ngFor="let category of categories"
+    (click)="filterCategory(category)"
+    [class.active]="selectedCategory === category"
+  >
+    {{ category }}
+  </button>
+</div>
+
+<div class="product-list">
+  <div *ngFor="let product of filteredProducts()" class="product-card">
+    <img
+      [src]="product.image"
+      [alt]="product.name"
+      (error)="product.image = '/assets/images/fallback.jpg'"
+    />
+    <h4>{{ product.name }}</h4>
+    <p>₱{{ product.price }}</p>
+    <button [routerLink]="['/options']" [state]="{ product: product }" class="add-to-cart">
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+<!-- Bottom Navbar -->
+<nav class="bottom-navbar">
+  <a routerLink="/home" title="Home">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a routerLink="/cart" title="Cart" style="position: relative;">
+    <i class="fas fa-shopping-cart"></i>
+    <span *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+    <span>Cart</span>
+  </a>
+  <a routerLink="/notifications" title="Notifications" style="position: relative;">
+    <i class="fas fa-bell"></i>
+    <span *ngIf="unreadNotificationCount > 0" class="notification-badge">{{ unreadNotificationCount }}</span>
+    <span>Notifications</span>
+  </a>
+  <a routerLink="/profile" title="Profile">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </a>
+</nav>

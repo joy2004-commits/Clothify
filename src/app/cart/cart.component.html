@@ -1,0 +1,63 @@
+<!-- Top Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h2>Clothify - Cart</h2>
+  </div>
+  <div class="nav-right">
+    <a (click)="signOut()" style="cursor: pointer;" title="Sign Out">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Sign out</span>
+    </a>
+  </div>
+</nav>
+
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div class="cart-list" *ngIf="cartItems.length > 0; else emptyCart">
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="item.product.image" [alt]="item.product.name" />
+      <div class="item-details">
+        <h4>{{ item.product.name }}</h4>
+        <p>₱{{ item.product.price }} x {{ item.quantity }}</p>
+        <p *ngIf="item.selectedColor">Color: {{ item.selectedColor }}</p>
+        <p *ngIf="item.selectedSize">Size: {{ item.selectedSize }}</p>
+        <div class="quantity-controls">
+          <button (click)="decrementQuantity(item)" [disabled]="item.quantity <= 1">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="incrementQuantity(item)">+</button>
+        </div>
+        <button (click)="removeFromCart(item)" class="remove-button">Remove</button>
+      </div>
+    </div>
+    <div class="cart-total">
+      <h3 class="total">Total: ₱{{ getTotalPrice() }}</h3>
+      <button (click)="checkout()" [disabled]="!currentUser || cartItems.length === 0" class="checkout-button">Proceed to Checkout</button>
+    </div>
+    <button (click)="clearCart()" class="clear-cart-button">Clear Cart</button>
+  </div>
+  <ng-template #emptyCart>
+    <p>Your cart is empty. <a routerLink="/home">Shop now</a>.</p>
+  </ng-template>
+</div>
+
+<!-- Bottom Navbar -->
+<nav class="bottom-navbar">
+  <a routerLink="/home" title="Home">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a routerLink="/cart" title="Cart" style="position: relative;">
+    <i class="fas fa-shopping-cart"></i>
+    <span *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+    <span>Cart</span>
+  </a>
+  <a routerLink="/notifications" title="Notifications" style="position: relative;">
+    <i class="fas fa-bell"></i>
+    <span *ngIf="unreadNotificationCount > 0" class="notification-badge">{{ unreadNotificationCount }}</span>
+    <span>Notifications</span>
+  </a>
+  <a routerLink="/profile" title="Profile">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </a>
+</nav>

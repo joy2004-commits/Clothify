@@ -1,0 +1,147 @@
+<!-- Top Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h2>Clothify - Profile</h2>
+  </div>
+  <div class="nav-right">
+    <a (click)="signOut()" style="cursor: pointer;" title="Sign Out">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Sign out</span>
+    </a>
+  </div>
+</nav>
+
+<div class="profile-container">
+  <h2>User Profile</h2>
+  <div *ngIf="currentUser; else noUser" class="profile-card">
+    <form #profileForm="ngForm" (ngSubmit)="saveProfile()" class="profile-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          [(ngModel)]="currentUser.username"
+          name="username"
+          type="text"
+          disabled
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          [(ngModel)]="currentUser.email"
+          name="email"
+          type="email"
+          disabled
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          id="fullName"
+          [(ngModel)]="currentUser.fullName"
+          name="fullName"
+          type="text"
+          class="form-control"
+          [required]="true"
+          [class.invalid]="profileForm.controls['fullName'].invalid && profileForm.controls['fullName'].touched"
+        />
+        <span *ngIf="profileForm.controls['fullName'].invalid && profileForm.controls['fullName'].touched" class="error">Full name is required.</span>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea
+          id="address"
+          [(ngModel)]="currentUser.address"
+          name="address"
+          class="form-control"
+          [required]="true"
+          [class.invalid]="profileForm.controls['address'].invalid && profileForm.controls['address'].touched"
+        ></textarea>
+        <span *ngIf="profileForm.controls['address'].invalid && profileForm.controls['address'].touched" class="error">Address is required.</span>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" (click)="debugSaveButton()" [disabled]="!profileForm?.valid || isLoading" class="save-button">
+          <span *ngIf="isLoading" class="spinner"></span>
+          <span>Save Changes</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="password-section" *ngIf="isEditingPassword">
+      <h3>Change Password</h3>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input
+          id="newPassword"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+          type="password"
+          class="form-control"
+          required
+          minlength="6"
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="button-group">
+        <button type="button" (click)="changePassword()" class="save-button">Save Password</button>
+        <button type="button" (click)="togglePasswordEdit()" class="cancel-button">Cancel</button>
+      </div>
+    </div>
+    <button type="button" (click)="togglePasswordEdit()" class="edit-password-button" *ngIf="!isEditingPassword">
+      Change Password
+    </button>
+
+    <div class="order-history" *ngIf="orders.length > 0">
+      <h3>Order History</h3>
+      <div class="order-card" *ngFor="let order of orders">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Date:</strong> {{ order.date }}</p>
+        <p><strong>Total:</strong> ₱{{ order.total }}</p>
+      </div>
+    </div>
+    <p *ngIf="orders.length === 0" class="no-orders">No orders yet. <a routerLink="/home">Start shopping</a>.</p>
+
+    <button type="button" (click)="deleteAccount()" class="delete-button">Delete Account</button>
+  </div>
+  <ng-template #noUser>
+    <p class="no-user">No user data available. <a routerLink="/login-register">Please log in</a>.</p>
+  </ng-template>
+</div>
+
+<!-- Bottom Navbar -->
+<nav class="bottom-navbar">
+  <a routerLink="/home" title="Home">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a routerLink="/cart" title="Cart" style="position: relative;">
+    <i class="fas fa-shopping-cart"></i>
+    <span *ngIf="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+    <span>Cart</span>
+  </a>
+  <a routerLink="/notifications" title="Notifications" style="position: relative;">
+    <i class="fas fa-bell"></i>
+    <span *ngIf="unreadNotificationCount > 0" class="notification-badge">{{ unreadNotificationCount }}</span>
+    <span>Notifications</span>
+  </a>
+  <a routerLink="/profile" title="Profile">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </a>
+</nav>

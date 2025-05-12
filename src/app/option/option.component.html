@@ -1,0 +1,23 @@
+<div class="option-container">
+  <h2>Select Options for {{ product?.name }}</h2>
+  <img [src]="product?.image" [alt]="product?.name" (error)="onImageError()" />
+  <p>Price: ₱{{ product?.price }}</p>
+
+  <div class="option-selection">
+    <label for="color">Color:</label>
+    <select id="color" [(ngModel)]="selectedColor" name="color">
+      <option value="" disabled selected>Select Color</option>
+      <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+    </select>
+
+    <label for="size">Size:</label>
+    <select id="size" [(ngModel)]="selectedSize" name="size">
+      <option value="" disabled selected>Select Size</option>
+      <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+    </select>
+  </div>
+
+  <button (click)="saveToCart()" [disabled]="!selectedColor || !selectedSize">
+    Save to Cart
+  </button>
+</div>
